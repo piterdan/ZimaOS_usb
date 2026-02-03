@@ -1,0 +1,46 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "release",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "release-ninja",
+      "inherits": "release",
+      "generator": "Ninja"
+    },
+    {
+      "name": "release-macos",
+      "inherits": "release-ninja",
+      "cacheVariables": {
+        "CMAKE_OSX_ARCHITECTURES": "x86_64;arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "11.0"
+      }
+    },
+    {
+      "name": "release-msvc",
+      "inherits": "release",
+      "generator": "NMake Makefiles"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "configurePreset": "release"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "output": {
+        "verbose": true
+      }
+    }
+  ]
+}
